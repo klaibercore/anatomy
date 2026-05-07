@@ -27,7 +27,10 @@ const App = {
     }
 
     try {
-      const resp = await fetch(topic.dataFile);
+      // Resolve path relative to site root (handles GH Pages subpath)
+      const basePath = window.location.pathname.replace(/\/topics\/.*$/, '');
+      const dataUrl = topic.dataFile.startsWith('/') ? topic.dataFile : `${basePath}/${topic.dataFile}`;
+      const resp = await fetch(dataUrl);
       if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${topic.dataFile}`);
       this.state.data = await resp.json();
       if (!this.state.data.bones || !Array.isArray(this.state.data.bones))
