@@ -1,0 +1,316 @@
+/* ══════════════════════════════════
+   Anatomy — CSS Framework
+   ══════════════════════════════════ */
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface-2: #242838;
+  --text: #e8e6e3;
+  --text-dim: #888a96;
+  --accent: #c9a96e;
+  --accent-glow: rgba(201, 169, 110, 0.15);
+  --bone: #e8d5b7;
+  --bone-hover: #f5e8d0;
+  --bone-active: #ffd700;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── Navigation ─── */
+nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--surface-2);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+nav .logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.5px;
+  color: var(--accent);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+nav .logo span { font-size: 1.4rem; }
+
+nav a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; transition: color .2s; }
+nav a:hover { color: var(--text); }
+
+/* ─── Layout ─── */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ─── Topic Cards (Hub) ─── */
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.topic-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius);
+  padding: 24px;
+  cursor: pointer;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+
+.topic-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px var(--accent-glow);
+}
+
+.topic-card .icon { font-size: 2rem; margin-bottom: 12px; }
+.topic-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.topic-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+.topic-card .topic-count {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-glow);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* ─── Topic Page ─── */
+.topic-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 32px;
+  min-height: calc(100vh - 80px);
+}
+
+.topic-visual {
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.topic-visual svg {
+  width: 100%;
+  height: auto;
+  max-height: 75vh;
+}
+
+/* ─── Bone SVG Clickable Areas ─── */
+.bone-area {
+  cursor: pointer;
+  transition: opacity .2s;
+}
+
+.bone-area:hover,
+.bone-area.active {
+  opacity: 1 !important;
+}
+
+.bone-area .bone-shape {
+  fill: var(--bone);
+  stroke: #b89a7a;
+  stroke-width: 1.5;
+  transition: fill .2s, stroke .2s;
+}
+
+.bone-area:hover .bone-shape {
+  fill: var(--bone-hover);
+  stroke: var(--bone-active);
+  stroke-width: 2;
+}
+
+.bone-area.active .bone-shape {
+  fill: #ffd700;
+  stroke: #e6c200;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+}
+
+.bone-label {
+  fill: var(--text-dim);
+  font-size: 10px;
+  text-anchor: middle;
+  pointer-events: none;
+  font-family: var(--font);
+}
+
+/* ─── Info Panel ─── */
+.info-panel {
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.info-panel .panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--surface-2);
+}
+
+.info-panel .panel-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.info-panel .panel-latin {
+  color: var(--text-dim);
+  font-style: italic;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.info-panel .panel-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.info-panel .panel-fun-fact {
+  background: var(--accent-glow);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.85rem;
+  color: var(--accent);
+  line-height: 1.6;
+}
+
+.info-panel .panel-empty {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.info-panel .panel-empty .hint-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+/* ─── Bone List (Sidebar nav) ─── */
+.bone-list {
+  margin-top: 16px;
+}
+
+.bone-list-item {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background .15s, color .15s;
+}
+
+.bone-list-item:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.bone-list-item.active {
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+
+/* ─── Progress ─── */
+.progress-bar {
+  height: 4px;
+  background: var(--surface-2);
+  border-radius: 2px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.progress-bar .fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width .4s ease;
+}
+
+/* ─── Hub Header ─── */
+.hub-header {
+  text-align: center;
+  padding: 48px 0 32px;
+}
+
+.hub-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.hub-header p {
+  color: var(--text-dim);
+  font-size: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3f55; }
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .topic-layout {
+    grid-template-columns: 1fr;
+  }
+  .info-panel {
+    position: static;
+    max-height: none;
+  }
+  .topic-visual svg {
+    max-height: 50vh;
+  }
+}

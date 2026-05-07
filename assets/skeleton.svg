@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" fill="none">
+  <!-- Skeleton illustration — anterior view -->
+  <defs>
+    <style>
+      .bone-fill { fill: #e8d5b7; }
+      .bone-stroke { stroke: #b89a7a; stroke-width: 1.5; }
+      .label { fill: #888a96; font-family: system-ui, sans-serif; font-size: 9px; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Cranium -->
+  <g class="bone-area" data-bone="cranium">
+    <path class="bone-shape" d="M160 55 C160 25, 200 15, 220 15 C240 15, 280 25, 280 55 L285 80 C290 100, 280 120, 270 130 L260 135 Q240 145, 220 145 Q200 145, 180 135 L170 130 C160 120, 150 100, 155 80 Z"/>
+  </g>
+
+  <!-- Mandible -->
+  <g class="bone-area" data-bone="mandible">
+    <path class="bone-shape" d="M175 135 Q165 155, 170 170 L180 178 L260 178 L270 170 Q275 155, 265 135 L255 142 Q240 148, 220 148 Q200 148, 185 142 Z"/>
+  </g>
+
+  <!-- Clavicle Left -->
+  <g class="bone-area" data-bone="clavicle">
+    <path class="bone-shape" d="M220 200 Q170 200, 130 195 Q120 193, 115 196 L113 200 Q118 205, 135 205 Q180 210, 220 206 Z"/>
+    <path class="bone-shape" d="M220 200 Q270 200, 310 195 Q320 193, 325 196 L327 200 Q322 205, 305 205 Q260 210, 220 206 Z"/>
+  </g>
+
+  <!-- Scapula Left -->
+  <g class="bone-area" data-bone="scapula">
+    <path class="bone-shape" d="M125 210 L115 260 Q110 280, 115 300 L120 305 Q128 280, 132 260 Q135 240, 130 210 Z"/>
+    <path class="bone-shape" d="M315 210 L325 260 Q330 280, 325 300 L320 305 Q312 280, 308 260 Q305 240, 310 210 Z"/>
+  </g>
+
+  <!-- Sternum -->
+  <g class="bone-area" data-bone="sternum">
+    <path class="bone-shape" d="M210 210 Q215 208, 220 208 Q225 208, 230 210 L232 310 Q230 315, 220 315 Q210 315, 208 310 Z"/>
+  </g>
+
+  <!-- Rib Cage -->
+  <g class="bone-area" data-bone="ribs">
+    <!-- Left ribs -->
+    <path class="bone-shape" d="M210 220 Q180 225, 145 235 Q140 237, 142 240 Q175 235, 208 230 Z"/>
+    <path class="bone-shape" d="M210 238 Q180 245, 140 260 Q136 262, 138 266 Q175 252, 208 248 Z"/>
+    <path class="bone-shape" d="M210 256 Q185 265, 148 282 Q144 284, 147 288 Q180 273, 208 265 Z"/>
+    <path class="bone-shape" d="M210 274 Q190 282, 160 300 Q156 302, 159 306 Q185 290, 208 282 Z"/>
+    <path class="bone-shape" d="M210 290 Q195 296, 175 310 Q172 313, 175 316 Q192 305, 208 298 Z"/>
+    <path class="bone-shape" d="M210 305 Q198 308, 185 318 Q182 321, 185 324 Q195 316, 208 312 Z"/>
+    <!-- Right ribs -->
+    <path class="bone-shape" d="M230 220 Q260 225, 295 235 Q300 237, 298 240 Q265 235, 232 230 Z"/>
+    <path class="bone-shape" d="M230 238 Q260 245, 300 260 Q304 262, 302 266 Q265 252, 232 248 Z"/>
+    <path class="bone-shape" d="M230 256 Q255 265, 292 282 Q296 284, 293 288 Q260 273, 232 265 Z"/>
+    <path class="bone-shape" d="M230 274 Q250 282, 280 300 Q284 302, 281 306 Q255 290, 232 282 Z"/>
+    <path class="bone-shape" d="M230 290 Q245 296, 265 310 Q268 313, 265 316 Q248 305, 232 298 Z"/>
+    <path class="bone-shape" d="M230 305 Q242 308, 255 318 Q258 321, 255 324 Q245 316, 232 312 Z"/>
+  </g>
+
+  <!-- Humerus Left -->
+  <g class="bone-area" data-bone="humerus">
+    <path class="bone-shape" d="M128 210 Q120 250, 118 290 Q116 330, 120 360 Q122 370, 126 375 L130 373 Q128 360, 125 330 Q123 290, 125 250 Q128 225, 135 210 Z"/>
+    <path class="bone-shape" d="M312 210 Q320 250, 322 290 Q324 330, 320 360 Q318 370, 314 375 L310 373 Q312 360, 315 330 Q317 290, 315 250 Q312 225, 305 210 Z"/>
+  </g>
+
+  <!-- Radius Left -->
+  <g class="bone-area" data-bone="radius">
+    <path class="bone-shape" d="M118 372 Q112 400, 110 430 Q108 460, 112 480 L116 478 Q115 460, 116 435 Q117 410, 120 380 Z"/>
+  </g>
+
+  <!-- Ulna Left -->
+  <g class="bone-area" data-bone="ulna">
+    <path class="bone-shape" d="M126 373 Q130 390, 132 400 L133 405 L130 406 Q127 395, 123 380 Z"/>
+    <path class="bone-shape" d="M124 405 Q120 435, 118 460 Q116 485, 120 500 L124 498 Q123 480, 124 455 Q126 430, 128 405 Z"/>
+  </g>
+
+  <!-- Radius Right -->
+  <g class="bone-area" data-bone="radius">
+    <path class="bone-shape" d="M322 372 Q328 400, 330 430 Q332 460, 328 480 L324 478 Q325 460, 324 435 Q323 410, 320 380 Z"/>
+  </g>
+
+  <!-- Ulna Right -->
+  <g class="bone-area" data-bone="ulna">
+    <path class="bone-shape" d="M314 373 Q310 390, 308 400 L307 405 L310 406 Q313 395, 317 380 Z"/>
+    <path class="bone-shape" d="M316 405 Q320 435, 322 460 Q324 485, 320 500 L316 498 Q317 480, 316 455 Q314 430, 312 405 Z"/>
+  </g>
+
+  <!-- Carpals / Wrist Left -->
+  <g class="bone-area" data-bone="carpals">
+    <rect class="bone-shape" x="108" y="480" width="18" height="18" rx="3"/>
+  </g>
+
+  <!-- Carpals / Wrist Right -->
+  <g class="bone-area" data-bone="carpals">
+    <rect class="bone-shape" x="314" y="480" width="18" height="18" rx="3"/>
+  </g>
+
+  <!-- Metacarpals Left -->
+  <g class="bone-area" data-bone="metacarpals">
+    <rect class="bone-shape" x="110" y="498" width="14" height="35" rx="2"/>
+  </g>
+
+  <!-- Metacarpals Right -->
+  <g class="bone-area" data-bone="metacarpals">
+    <rect class="bone-shape" x="316" y="498" width="14" height="35" rx="2"/>
+  </g>
+
+  <!-- Phalanges Left -->
+  <g class="bone-area" data-bone="phalanges">
+    <rect class="bone-shape" x="111" y="533" width="12" height="30" rx="2"/>
+  </g>
+
+  <!-- Phalanges Right -->
+  <g class="bone-area" data-bone="phalanges">
+    <rect class="bone-shape" x="317" y="533" width="12" height="30" rx="2"/>
+  </g>
+
+  <!-- Pelvis -->
+  <g class="bone-area" data-bone="pelvis">
+    <path class="bone-shape" d="M170 320 Q160 340, 155 365 Q152 380, 155 395 L165 400 Q170 395, 172 380 Q175 360, 180 340 Q200 325, 220 322 Q240 325, 260 340 Q265 360, 268 380 Q270 395, 275 400 L285 395 Q288 380, 285 365 Q280 340, 270 320 Q250 310, 220 308 Q190 310, 170 320 Z"/>
+    <circle class="bone-shape" cx="220" cy="345" r="8"/>
+  </g>
+
+  <!-- Femur Left -->
+  <g class="bone-area" data-bone="femur">
+    <path class="bone-shape" d="M170 395 Q165 430, 160 470 Q155 510, 158 540 Q160 555, 166 565 L172 562 Q168 540, 166 510 Q163 470, 168 430 Q172 410, 176 398 Z"/>
+  </g>
+
+  <!-- Femur Right -->
+  <g class="bone-area" data-bone="femur">
+    <path class="bone-shape" d="M270 395 Q275 430, 280 470 Q285 510, 282 540 Q280 555, 274 565 L268 562 Q272 540, 274 510 Q277 470, 272 430 Q268 410, 264 398 Z"/>
+  </g>
+
+  <!-- Patella Left -->
+  <g class="bone-area" data-bone="patella">
+    <ellipse class="bone-shape" cx="165" cy="555" rx="10" ry="8"/>
+  </g>
+
+  <!-- Patella Right -->
+  <g class="bone-area" data-bone="patella">
+    <ellipse class="bone-shape" cx="275" cy="555" rx="10" ry="8"/>
+  </g>
+
+  <!-- Tibia Left -->
+  <g class="bone-area" data-bone="tibia">
+    <path class="bone-shape" d="M165 562 Q160 590, 158 620 Q156 650, 160 670 Q162 680, 168 685 L174 682 Q170 660, 168 640 Q165 610, 168 580 Q170 570, 172 562 Z"/>
+  </g>
+
+  <!-- Tibia Right -->
+  <g class="bone-area" data-bone="tibia">
+    <path class="bone-shape" d="M275 562 Q280 590, 282 620 Q284 650, 280 670 Q278 680, 272 685 L266 682 Q270 660, 272 640 Q275 610, 272 580 Q270 570, 268 562 Z"/>
+  </g>
+
+  <!-- Fibula Left -->
+  <g class="bone-area" data-bone="fibula">
+    <path class="bone-shape" d="M150 565 Q145 600, 143 635 Q141 665, 148 685 L152 683 Q148 660, 148 635 Q148 608, 153 572 Z"/>
+  </g>
+
+  <!-- Fibula Right -->
+  <g class="bone-area" data-bone="fibula">
+    <path class="bone-shape" d="M290 565 Q295 600, 297 635 Q299 665, 292 685 L288 683 Q292 660, 292 635 Q292 608, 287 572 Z"/>
+  </g>
+
+  <!-- Tarsals / Ankle Left -->
+  <g class="bone-area" data-bone="tarsals">
+    <rect class="bone-shape" x="148" y="683" width="28" height="16" rx="4"/>
+  </g>
+
+  <!-- Tarsals / Ankle Right -->
+  <g class="bone-area" data-bone="tarsals">
+    <rect class="bone-shape" x="264" y="683" width="28" height="16" rx="4"/>
+  </g>
+
+  <!-- Metatarsals Left -->
+  <g class="bone-area" data-bone="metatarsals">
+    <rect class="bone-shape" x="152" y="699" width="20" height="28" rx="3"/>
+  </g>
+
+  <!-- Metatarsals Right -->
+  <g class="bone-area" data-bone="metatarsals">
+    <rect class="bone-shape" x="268" y="699" width="20" height="28" rx="3"/>
+  </g>
+
+  <!-- Phalanges Left (toes hidden in skeleton) -->
+
+  <!-- Center guide text -->
+  <text class="label" x="220" y="780" font-size="11" opacity="0.4">Anterior View</text>
+</svg>

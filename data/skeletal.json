@@ -1,0 +1,141 @@
+{
+  "id": "skeletal",
+  "title": "Skeletal System",
+  "subtitle": "206 bones that form the structural framework of the human body",
+  "color": "#e8d5b7",
+  "bones": [
+    {
+      "id": "cranium",
+      "name": "Cranium",
+      "latin": "Cranium",
+      "description": "The skull cap that protects the brain. Composed of several fused bones forming a rigid shell.",
+      "funFact": "The cranium is made of 8 fused bones, and at birth the gaps (fontanelles) haven't closed yet — that's the 'soft spot' on a baby's head."
+    },
+    {
+      "id": "mandible",
+      "name": "Mandible",
+      "latin": "Mandibula",
+      "description": "The lower jaw bone. The largest and strongest bone of the face, it holds the lower teeth and enables chewing.",
+      "funFact": "The mandible is the only skull bone that can move — everything else is fused together."
+    },
+    {
+      "id": "clavicle",
+      "name": "Clavicle",
+      "latin": "Clavicula",
+      "description": "The collarbone. A long, thin bone connecting the arm to the torso.",
+      "funFact": "The clavicle is the most commonly broken bone in the human body."
+    },
+    {
+      "id": "scapula",
+      "name": "Scapula",
+      "latin": "Scapula",
+      "description": "The shoulder blade. A large, triangular bone on the upper back that anchors arm muscles.",
+      "funFact": "Your scapula isn't directly attached to your ribcage — it floats in a sea of muscles!"
+    },
+    {
+      "id": "sternum",
+      "name": "Sternum",
+      "latin": "Sternum",
+      "description": "The breastbone. A flat, dagger-shaped bone in the center of the chest that connects the ribs.",
+      "funFact": "The sternum is where CPR compressions are applied — it can withstand up to 100 kg of force."
+    },
+    {
+      "id": "ribs",
+      "name": "Rib Cage",
+      "latin": "Costae",
+      "description": "12 pairs of curved bones forming the thoracic cage, protecting the heart and lungs.",
+      "funFact": "You have 12 pairs of ribs — the bottom 2 are 'floating ribs' that don't attach to the sternum."
+    },
+    {
+      "id": "humerus",
+      "name": "Humerus",
+      "latin": "Humerus",
+      "description": "The upper arm bone extending from shoulder to elbow. The longest bone of the arm.",
+      "funFact": "\"Humerus\" literally means \"upper arm\" in Latin. Yes, it's related to the word 'humorous' because it's funny… bone."
+    },
+    {
+      "id": "radius",
+      "name": "Radius",
+      "latin": "Radius",
+      "description": "The forearm bone on the thumb side. Wider at the wrist than the ulna.",
+      "funFact": "The radius rotates around the ulna when you twist your wrist — that's what allows palm-up and palm-down motion."
+    },
+    {
+      "id": "ulna",
+      "name": "Ulna",
+      "latin": "Ulna",
+      "description": "The forearm bone on the pinky side. Forms the elbow joint with the humerus.",
+      "funFact": "The bump you feel at your elbow (the 'funny bone') is actually the ulna's olecranon process, not a bone you can break easily."
+    },
+    {
+      "id": "pelvis",
+      "name": "Pelvis",
+      "latin": "Pelvis",
+      "description": "The hip bone. A basin-shaped ring of bones supporting the spine and protecting abdominal organs.",
+      "funFact": "The female pelvis is wider and more oval than the male pelvis — evolved for childbirth."
+    },
+    {
+      "id": "femur",
+      "name": "Femur",
+      "latin": "Femur",
+      "description": "The thigh bone. The longest, strongest, and heaviest bone in the human body.",
+      "funFact": "The femur is so strong it can support up to 30x your body weight. It takes a car collision to break one."
+    },
+    {
+      "id": "patella",
+      "name": "Patella",
+      "latin": "Patella",
+      "description": "The kneecap. A small, triangular bone embedded in the quadriceps tendon protecting the knee joint.",
+      "funFact": "The patella is a sesamoid bone — it grows inside a tendon rather than connecting to other bones via joints."
+    },
+    {
+      "id": "tibia",
+      "name": "Tibia",
+      "latin": "Tibia",
+      "description": "The shin bone. The larger, weight-bearing bone of the lower leg, second only to the femur in size.",
+      "funFact": "The tibia is the most common site for stress fractures in runners. Also — 'tibia' means 'flute' in Latin."
+    },
+    {
+      "id": "fibula",
+      "name": "Fibula",
+      "latin": "Fibula",
+      "description": "The thin bone of the lower leg, running alongside the tibia. Does not bear weight.",
+      "funFact": "The fibula doesn't bear weight — its main job is anchoring muscles. You can donate one and still walk normally."
+    },
+    {
+      "id": "carpals",
+      "name": "Carpals",
+      "latin": "Carpalia",
+      "description": "The eight small bones forming the wrist, arranged in two rows of four.",
+      "funFact": "The word 'carpal' comes from Greek 'karpos' meaning wrist. Carpal tunnel syndrome happens right here."
+    },
+    {
+      "id": "metacarpals",
+      "name": "Metacarpals",
+      "latin": "Metacarpalia",
+      "description": "The five long bones in the palm of the hand, connecting the wrist to the fingers.",
+      "funFact": "Your knuckles are the ends of metacarpals — the second and third metacarpals are the ones that 'crack' the loudest."
+    },
+    {
+      "id": "phalanges",
+      "name": "Phalanges (Fingers)",
+      "latin": "Phalanges digitorum manus",
+      "description": "The finger bones. 14 bones per hand — each finger has 3 (proximal, middle, distal), the thumb has 2.",
+      "funFact": "Despite being tiny, phalanges are some of the most densely innervated bones — that's why fingers are so sensitive."
+    },
+    {
+      "id": "tarsals",
+      "name": "Tarsals",
+      "latin": "Tarsalia",
+      "description": "The seven bones of the ankle and hindfoot, including the heel bone (calcaneus) and talus.",
+      "funFact": "The calcaneus (heel bone) is the largest tarsal and absorbs the impact of every step you take — about 1.5x your body weight per step."
+    },
+    {
+      "id": "metatarsals",
+      "name": "Metatarsals",
+      "latin": "Metatarsalia",
+      "description": "The five long bones in the midfoot, connecting the ankle to the toes.",
+      "funFact": "The second metatarsal is the longest and most commonly fractured in dancers — known as 'dancer's fracture'."
+    }
+  ]
+}
