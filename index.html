@@ -3,70 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anatomy — Hub</title>
+  <title>Human Anatomy — Interactive Learning</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Animated background particles (Canvas-based) -->
+  <style>
+    #particles-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+    main.container { position: relative; z-index: 1; }
+    nav { position: sticky; top: 0; z-index: 100; }
+  </style>
 </head>
 <body>
 
+<canvas id="particles-canvas"></canvas>
+
 <nav>
   <a href="/" class="logo"><span>🧬</span> Anatomy</a>
-  <a href="https://github.com/klaibercore/anatomy" target="_blank">GitHub</a>
+  <a href="https://github.com/klaibercore/anatomy" target="_blank" rel="noopener">GitHub</a>
 </nav>
 
 <main class="container">
   <div class="hub-header">
     <h1>Human Anatomy</h1>
-    <p>Explore the human body, one system at a time. Click a topic to start.</p>
+    <p>Explore the human body, one system at a time. Click a topic to begin your journey.</p>
+    <div class="hub-stats">
+      <span class="hub-stat">🦴 <strong>206</strong> bones documented</span>
+      <span class="hub-stat">🔬 <strong>68</strong> articulations catalogued</span>
+      <span class="hub-stat">📖 <strong>6</strong> systems coming</span>
+    </div>
   </div>
 
   <div class="topic-grid">
+    <!-- Skeletal System — active -->
     <a href="topics/skeletal.html" class="topic-card" style="text-decoration:none;color:inherit;">
       <div class="icon">🦴</div>
       <h3>Skeletal System</h3>
-      <p>206 bones forming the structural framework of the human body — from the cranium to the phalanges.</p>
-      <div class="topic-count">19 bone groups</div>
+      <p>206 bones forming the structural framework of the human body — from the cranium to the phalanges. Schema-driven with 68 articulations and 84 ligaments.</p>
+      <div class="topic-count">19 bone groups · Reference data</div>
     </a>
 
-    <!-- Placeholder cards for future topics -->
-    <div class="topic-card" style="opacity:0.3;pointer-events:none;">
+    <!-- Placeholder / Coming Soon cards -->
+    <div class="topic-card locked">
       <div class="icon">💪</div>
       <h3>Muscular System</h3>
-      <p>600+ muscles enabling movement, posture, and heat generation. Coming soon.</p>
-      <div class="topic-count">Soon</div>
+      <p>600+ muscles enabling movement, posture, and heat generation. Origins, insertions, actions, and innervation mapped out.</p>
+      <div class="topic-count">Coming Soon</div>
     </div>
 
-    <div class="topic-card" style="opacity:0.3;pointer-events:none;">
+    <div class="topic-card locked">
       <div class="icon">❤️</div>
       <h3>Circulatory System</h3>
-      <p>Heart, blood vessels, and the 60,000 miles of vasculature keeping you alive. Coming soon.</p>
-      <div class="topic-count">Soon</div>
+      <p>Heart, blood vessels, and the 60,000 miles of vasculature keeping you alive. Arteries, veins, and capillary networks.</p>
+      <div class="topic-count">Coming Soon</div>
     </div>
 
-    <div class="topic-card" style="opacity:0.3;pointer-events:none;">
+    <div class="topic-card locked">
       <div class="icon">🧠</div>
       <h3>Nervous System</h3>
-      <p>Brain, spinal cord, and the network of nerves firing signals at 120 m/s. Coming soon.</p>
-      <div class="topic-count">Soon</div>
+      <p>Brain, spinal cord, and the network of nerves firing signals at 120 m/s. Central and peripheral divisions.</p>
+      <div class="topic-count">Coming Soon</div>
     </div>
 
-    <div class="topic-card" style="opacity:0.3;pointer-events:none;">
+    <div class="topic-card locked">
       <div class="icon">🫁</div>
       <h3>Respiratory System</h3>
-      <p>Lungs, diaphragm, and the 20,000 breaths you take each day. Coming soon.</p>
-      <div class="topic-count">Soon</div>
+      <p>Lungs, diaphragm, airways, and the 20,000 breaths you take each day. Gas exchange and mechanics.</p>
+      <div class="topic-count">Coming Soon</div>
     </div>
 
-    <div class="topic-card" style="opacity:0.3;pointer-events:none;">
+    <div class="topic-card locked">
       <div class="icon">🫀</div>
       <h3>Digestive System</h3>
-      <p>From mouth to colon — the 9-meter journey of digestion. Coming soon.</p>
-      <div class="topic-count">Soon</div>
+      <p>From mouth to colon — the 9-meter journey of digestion. Organs, enzymes, and nutrient absorption.</p>
+      <div class="topic-count">Coming Soon</div>
     </div>
   </div>
 </main>
+
+<script>
+// ─── Animated Particle Background ───
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let mouseX = -1000, mouseY = -1000;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = document.body.scrollHeight || window.innerHeight;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  const COUNT = 60;
+  const COLORS = ['rgba(201,169,110,', 'rgba(255,255,255,'];
+
+  for (let i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 0.5,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      alpha: Math.random() * 0.3 + 0.05,
+    });
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Wrap around
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+
+      // Draw
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + p.alpha + ')';
+      ctx.fill();
+    }
+
+    // Draw connections (nearby particles)
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(201,169,110,${0.06 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+
+      // Mouse proximity connection
+      const dx = particles[i].x - mouseX;
+      const dy = particles[i].y - mouseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 150) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(mouseX, mouseY);
+        ctx.strokeStyle = `rgba(201,169,110,${0.1 * (1 - dist / 150)})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+</script>
 
 </body>
 </html>
