@@ -27,9 +27,17 @@ const App = {
     }
 
     try {
-      // Resolve path relative to site root (handles GH Pages subpath)
-      const basePath = window.location.pathname.replace(/\/topics\/.*$/, '');
-      const dataUrl = topic.dataFile.startsWith('/') ? topic.dataFile : `${basePath}/${topic.dataFile}`;
+      // dataFile is relative to repo root (e.g. 'data/skeletal.json')
+      // but topics/ is one level deep. Determine the repo root URL.
+      const pathname = window.location.pathname;
+      // pathname examples:
+      //   GitHub Pages:  /anatomy/topics/skeletal.html
+      //   Root domain:   /topics/skeletal.html
+      //   Local file:    /Users/.../topics/skeletal.html (won't match)
+      // Strategy: if path contains /topics/, go one level up for repo root
+      const idx = pathname.indexOf('/topics/');
+      const repoRoot = idx >= 0 ? pathname.substring(0, idx + 1) : '/';
+      const dataUrl = `${repoRoot}${topic.dataFile}`;
       const resp = await fetch(dataUrl);
       if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${topic.dataFile}`);
       this.state.data = await resp.json();
