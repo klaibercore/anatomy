@@ -19,7 +19,6 @@
 
 <main class="container" style="max-width:1500px;">
   <div class="topic-layout">
-    <!-- Left: SVG illustration (inline for full DOM access) -->
     <div class="topic-visual">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" fill="none" style="width:100%;height:auto;max-height:75vh;">
         <style>
@@ -76,7 +75,6 @@
           <path class="bone-shape" d="M312 210 Q320 250, 322 290 Q324 330, 320 360 Q318 370, 314 375 L310 373 Q312 360, 315 330 Q317 290, 315 250 Q312 225, 305 210 Z"/>
         </g>
 
-        <!-- Radius / Ulna groups -->
         <g class="bone-area" data-bone="radius">
           <path class="bone-shape" d="M118 372 Q112 400, 110 430 Q108 460, 112 480 L116 478 Q115 460, 116 435 Q117 410, 120 380 Z"/>
           <path class="bone-shape" d="M322 372 Q328 400, 330 430 Q332 460, 328 480 L324 478 Q325 460, 324 435 Q323 410, 320 380 Z"/>
@@ -89,61 +87,51 @@
           <path class="bone-shape" d="M316 405 Q320 435, 322 460 Q324 485, 320 500 L316 498 Q317 480, 316 455 Q314 430, 312 405 Z"/>
         </g>
 
-        <!-- Carpals -->
         <g class="bone-area" data-bone="carpals">
           <rect class="bone-shape" x="108" y="480" width="18" height="18" rx="3"/>
           <rect class="bone-shape" x="314" y="480" width="18" height="18" rx="3"/>
         </g>
 
-        <!-- Metacarpals -->
         <g class="bone-area" data-bone="metacarpals">
           <rect class="bone-shape" x="110" y="498" width="14" height="35" rx="2"/>
           <rect class="bone-shape" x="316" y="498" width="14" height="35" rx="2"/>
         </g>
 
-        <!-- Phalanges (fingers) -->
         <g class="bone-area" data-bone="phalanges">
           <rect class="bone-shape" x="111" y="533" width="12" height="30" rx="2"/>
           <rect class="bone-shape" x="317" y="533" width="12" height="30" rx="2"/>
         </g>
 
-        <!-- Pelvis -->
         <g class="bone-area" data-bone="pelvis">
           <path class="bone-shape" d="M170 320 Q160 340, 155 365 Q152 380, 155 395 L165 400 Q170 395, 172 380 Q175 360, 180 340 Q200 325, 220 322 Q240 325, 260 340 Q265 360, 268 380 Q270 395, 275 400 L285 395 Q288 380, 285 365 Q280 340, 270 320 Q250 310, 220 308 Q190 310, 170 320 Z"/>
           <circle class="bone-shape" cx="220" cy="345" r="8"/>
         </g>
 
-        <!-- Femur -->
         <g class="bone-area" data-bone="femur">
           <path class="bone-shape" d="M170 395 Q165 430, 160 470 Q155 510, 158 540 Q160 555, 166 565 L172 562 Q168 540, 166 510 Q163 470, 168 430 Q172 410, 176 398 Z"/>
           <path class="bone-shape" d="M270 395 Q275 430, 280 470 Q285 510, 282 540 Q280 555, 274 565 L268 562 Q272 540, 274 510 Q277 470, 272 430 Q268 410, 264 398 Z"/>
         </g>
 
-        <!-- Patella -->
         <g class="bone-area" data-bone="patella">
           <ellipse class="bone-shape" cx="165" cy="555" rx="10" ry="8"/>
           <ellipse class="bone-shape" cx="275" cy="555" rx="10" ry="8"/>
         </g>
 
-        <!-- Tibia -->
         <g class="bone-area" data-bone="tibia">
           <path class="bone-shape" d="M165 562 Q160 590, 158 620 Q156 650, 160 670 Q162 680, 168 685 L174 682 Q170 660, 168 640 Q165 610, 168 580 Q170 570, 172 562 Z"/>
           <path class="bone-shape" d="M275 562 Q280 590, 282 620 Q284 650, 280 670 Q278 680, 272 685 L266 682 Q270 660, 272 640 Q275 610, 272 580 Q270 570, 268 562 Z"/>
         </g>
 
-        <!-- Fibula -->
         <g class="bone-area" data-bone="fibula">
           <path class="bone-shape" d="M150 565 Q145 600, 143 635 Q141 665, 148 685 L152 683 Q148 660, 148 635 Q148 608, 153 572 Z"/>
           <path class="bone-shape" d="M290 565 Q295 600, 297 635 Q299 665, 292 685 L288 683 Q292 660, 292 635 Q292 608, 287 572 Z"/>
         </g>
 
-        <!-- Tarsals -->
         <g class="bone-area" data-bone="tarsals">
           <rect class="bone-shape" x="148" y="683" width="28" height="16" rx="4"/>
           <rect class="bone-shape" x="264" y="683" width="28" height="16" rx="4"/>
         </g>
 
-        <!-- Metatarsals -->
         <g class="bone-area" data-bone="metatarsals">
           <rect class="bone-shape" x="152" y="699" width="20" height="28" rx="3"/>
           <rect class="bone-shape" x="268" y="699" width="20" height="28" rx="3"/>
@@ -153,16 +141,7 @@
       </svg>
     </div>
 
-    <!-- Right: Info panel -->
-    <div id="info-panel" class="info-panel">
-      <div class="panel-empty">
-        <div class="hint-icon">🦴</div>
-        <p>Click a bone on the skeleton to learn about it.</p>
-        <div id="progress-count" style="margin-top:12px;font-size:0.8rem;color:var(--text-dim);">
-          0 / 19 bones explored
-        </div>
-      </div>
-    </div>
+    <div id="info-panel" class="info-panel"></div>
   </div>
 </main>
 

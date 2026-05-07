@@ -1,0 +1,564 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/skeletal-system.simple.v1.json",
+  "title": "Skeletal System — Computational Anatomy (Simplified)",
+  "description": "Reference-anatomy schema for the human skeletal system. Assumes the standard anatomical position throughout (so neutral postures, joint zero positions, and directional terms are taken implicitly relative to it). Excludes development, ossification, growth, and variants. Numerical quantities (lengths, angles, ROM, etc.) are referenced through MeasurementDefinitions; no values, defaults, or averages are embedded.",
+  "type": "object",
+  "required": ["meta", "conventions", "regions", "bones", "articulations"],
+  "properties": {
+    "meta": { "$ref": "#/$defs/Meta" },
+    "conventions": { "$ref": "#/$defs/Conventions" },
+    "regions": { "type": "array", "items": { "$ref": "#/$defs/Region" } },
+    "bones": { "type": "array", "items": { "$ref": "#/$defs/Bone" } },
+    "bone_features": { "type": "array", "items": { "$ref": "#/$defs/BoneFeature" } },
+    "landmarks": { "type": "array", "items": { "$ref": "#/$defs/Landmark" } },
+    "articulations": { "type": "array", "items": { "$ref": "#/$defs/Articulation" } },
+    "ligaments": { "type": "array", "items": { "$ref": "#/$defs/Ligament" } },
+    "cartilages": { "type": "array", "items": { "$ref": "#/$defs/Cartilage" } },
+    "anatomical_relations": { "type": "array", "items": { "$ref": "#/$defs/AnatomicalRelation" } },
+    "coordinate_frames": { "type": "array", "items": { "$ref": "#/$defs/CoordinateFrame" } },
+    "measurement_definitions": { "type": "array", "items": { "$ref": "#/$defs/MeasurementDefinition" } }
+  },
+
+  "$defs": {
+
+    "Meta": {
+      "type": "object",
+      "required": ["schema_version", "id_scheme"],
+      "properties": {
+        "schema_version": { "type": "string" },
+        "dataset_id": { "type": "string" },
+        "id_scheme": { "type": "string", "enum": ["uri", "curie", "opaque", "uuid"] },
+        "language_tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "Conventions": {
+      "type": "object",
+      "description": "Declares the conventions used. Anatomical position is assumed as the reference posture for every direction, axis, and joint zero in this dataset.",
+      "required": ["anatomical_directions", "anatomical_planes", "side_values", "units"],
+      "properties": {
+        "anatomical_directions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/AnatomicalDirection" }
+        },
+        "anatomical_planes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/AnatomicalPlane" }
+        },
+        "side_values": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["left", "right", "median", "bilateral", "unsided"] }
+        },
+        "units": {
+          "type": "object",
+          "description": "Allowed units per quantity kind (UCUM codes recommended). No values stored here.",
+          "properties": {
+            "length": { "type": "array", "items": { "type": "string" } },
+            "angle": { "type": "array", "items": { "type": "string" } },
+            "area": { "type": "array", "items": { "type": "string" } },
+            "volume": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "global_frame_id": {
+          "type": "string",
+          "description": "Reference to the global coordinate frame for the dataset (e.g. 'LPS', 'RAS')."
+        }
+      }
+    },
+
+    "AnatomicalDirection": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": {
+          "type": "string",
+          "description": "e.g. 'superior', 'inferior', 'anterior', 'posterior', 'medial', 'lateral', 'proximal', 'distal', 'palmar', 'dorsal', 'plantar', 'radial', 'ulnar', 'tibial', 'fibular', 'deep', 'superficial', 'ipsilateral', 'contralateral'."
+        },
+        "antonym_id": { "type": "string" },
+        "axis_id": {
+          "type": "string",
+          "description": "References the body axis this direction lies on (e.g. limb long axis for proximal/distal, AP axis for anterior/posterior)."
+        },
+        "applicable_contexts": {
+          "type": "array",
+          "items": { "type": "string", "description": "e.g. 'limb', 'trunk', 'hand', 'foot'." }
+        }
+      }
+    },
+
+    "AnatomicalPlane": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "description": "e.g. 'sagittal', 'coronal', 'transverse'." },
+        "normal_axis_id": { "type": "string" }
+      }
+    },
+
+    "Names": {
+      "type": "object",
+      "properties": {
+        "preferred": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "BCP-47 tag → preferred label, e.g. {'en':'femur','la':'os femoris'}."
+        },
+        "synonyms": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "ExternalIds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ontology", "code"],
+        "properties": {
+          "ontology": { "type": "string", "description": "e.g. 'FMA', 'UBERON', 'TA2'." },
+          "code": { "type": "string" },
+          "label": { "type": "string" }
+        }
+      }
+    },
+
+    "Reference": {
+      "type": "object",
+      "required": ["ref_id"],
+      "properties": {
+        "ref_id": { "type": "string" },
+        "ref_type": {
+          "type": "string",
+          "enum": ["region", "bone", "bone_feature", "landmark", "articulation", "ligament", "cartilage", "measurement_definition", "coordinate_frame", "anatomical_direction", "anatomical_plane"]
+        }
+      }
+    },
+
+    "Region": {
+      "type": "object",
+      "required": ["id", "names"],
+      "properties": {
+        "id": { "type": "string" },
+        "names": { "$ref": "#/$defs/Names" },
+        "external_ids": { "$ref": "#/$defs/ExternalIds" },
+        "parent_region_id": { "type": "string" },
+        "division": { "type": "string", "enum": ["axial", "appendicular"] },
+        "side": { "type": "string", "enum": ["left", "right", "median", "bilateral", "unsided"] },
+        "contains": { "type": "array", "items": { "$ref": "#/$defs/Reference" } }
+      }
+    },
+
+    "Bone": {
+      "type": "object",
+      "required": ["id", "names"],
+      "properties": {
+        "id": { "type": "string" },
+        "names": { "$ref": "#/$defs/Names" },
+        "external_ids": { "$ref": "#/$defs/ExternalIds" },
+        "side": { "type": "string", "enum": ["left", "right", "median", "bilateral", "unsided"] },
+        "mirror_of": { "type": "string", "description": "Bone id of contralateral counterpart." },
+        "region_ids": { "type": "array", "items": { "type": "string" } },
+        "shape_class": {
+          "type": "string",
+          "enum": ["long", "short", "flat", "irregular", "sesamoid", "pneumatic"]
+        },
+        "axial_or_appendicular": { "type": "string", "enum": ["axial", "appendicular"] },
+        "feature_ids": { "type": "array", "items": { "type": "string" } },
+        "landmark_ids": { "type": "array", "items": { "type": "string" } },
+        "articulation_ids": { "type": "array", "items": { "type": "string" } },
+        "ligament_attachment_ids": { "type": "array", "items": { "type": "string" } },
+        "geometry": {
+          "type": "object",
+          "properties": {
+            "mesh_refs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uri": { "type": "string" },
+                  "format": { "type": "string", "enum": ["obj", "stl", "ply", "gltf", "vtk", "other"] },
+                  "frame_id": { "type": "string" }
+                }
+              }
+            },
+            "local_frame_id": { "type": "string" },
+            "principal_axis": {
+              "type": "object",
+              "description": "Bone's principal anatomical axis defined by two landmarks.",
+              "properties": {
+                "from_landmark_id": { "type": "string" },
+                "to_landmark_id": { "type": "string" },
+                "name": { "type": "string", "description": "e.g. 'mechanical_axis', 'shaft_axis'." }
+              }
+            }
+          }
+        },
+        "neighbors": {
+          "type": "array",
+          "description": "Convenience adjacency list. Canonical store remains anatomical_relations.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "neighbor_bone_id": { "type": "string" },
+              "via_articulation_id": { "type": "string" },
+              "direction_id": {
+                "type": "string",
+                "description": "AnatomicalDirection id; semantic direction from this bone toward neighbor."
+              }
+            }
+          }
+        },
+        "measurement_def_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "BoneFeature": {
+      "type": "object",
+      "description": "A named topographic feature on a bone (process, foramen, fossa, condyle, facet, etc.).",
+      "required": ["id", "names", "feature_type", "bone_id"],
+      "properties": {
+        "id": { "type": "string" },
+        "names": { "$ref": "#/$defs/Names" },
+        "external_ids": { "$ref": "#/$defs/ExternalIds" },
+        "bone_id": { "type": "string" },
+        "feature_type": {
+          "type": "string",
+          "enum": [
+            "process", "tubercle", "tuberosity", "trochanter", "spine", "crest", "line", "ridge",
+            "condyle", "epicondyle", "head", "facet", "surface",
+            "fossa", "groove", "sulcus", "notch",
+            "foramen", "canal", "meatus", "fissure",
+            "sinus",
+            "border", "margin", "angle",
+            "trochlea", "malleolus",
+            "ramus", "lamina", "pedicle",
+            "other"
+          ]
+        },
+        "is_articular": { "type": "boolean" },
+        "transmits": {
+          "type": "array",
+          "description": "Structures passing through (for foramina/canals/sulci).",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "kind": { "type": "string", "enum": ["nerve", "artery", "vein", "tendon", "ligament", "duct", "other"] }
+            }
+          }
+        },
+        "anatomical_relation_to_bone": {
+          "type": "array",
+          "description": "Direction tags locating the feature on its bone (e.g. 'distal', 'lateral', 'posterior').",
+          "items": { "type": "string", "description": "AnatomicalDirection id." }
+        },
+        "landmark_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "Landmark": {
+      "type": "object",
+      "description": "Anatomical point. Definition is geometric/topological; coordinates live in subject data.",
+      "required": ["id", "names", "definition_kind"],
+      "properties": {
+        "id": { "type": "string" },
+        "names": { "$ref": "#/$defs/Names" },
+        "external_ids": { "$ref": "#/$defs/ExternalIds" },
+        "bone_id": { "type": "string" },
+        "feature_id": { "type": "string" },
+        "definition_kind": {
+          "type": "string",
+          "enum": ["anatomical_named", "extremum", "centroid", "intersection", "projection", "constructed"]
+        },
+        "definition_text": { "type": "string", "description": "Operational definition in prose." },
+        "uses": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["registration", "frame_construction", "clinical_measurement", "biomechanics", "morphometrics"] }
+        }
+      }
+    },
+
+    "CoordinateFrame": {
+      "type": "object",
+      "description": "Frame definition. Built from landmarks so it generalizes across subjects.",
+      "required": ["id", "scope"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "scope": { "type": "string", "enum": ["global", "bone_local", "joint", "image"] },
+        "scope_ref": { "$ref": "#/$defs/Reference" },
+        "convention_tag": { "type": "string", "description": "e.g. 'ISB-knee', 'LPS', 'RAS'." },
+        "handedness": { "type": "string", "enum": ["right", "left"] },
+        "construction": {
+          "type": "object",
+          "properties": {
+            "origin": {
+              "type": "object",
+              "properties": {
+                "method": { "type": "string", "enum": ["landmark", "midpoint", "centroid"] },
+                "landmark_ids": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "axes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string", "enum": ["x", "y", "z"] },
+                  "anatomical_direction_id": { "type": "string" },
+                  "definition": { "type": "string", "enum": ["from_to_landmarks", "perpendicular_to_plane", "cross_product"] },
+                  "operands": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "Articulation": {
+      "type": "object",
+      "description": "A joint between two or more bones. ROM and motion sign conventions are taken with the anatomical position as zero.",
+      "required": ["id", "names", "structural_class", "participants"],
+      "properties": {
+        "id": { "type": "string" },
+        "names": { "$ref": "#/$defs/Names" },
+        "external_ids": { "$ref": "#/$defs/ExternalIds" },
+        "structural_class": { "type": "string", "enum": ["fibrous", "cartilaginous", "synovial"] },
+        "structural_subtype": {
+          "type": "string",
+          "enum": [
+            "suture", "gomphosis", "syndesmosis",
+            "synchondrosis", "symphysis",
+            "plane", "hinge", "pivot", "condyloid", "saddle", "ball_and_socket",
+            "compound", "other"
+          ]
+        },
+        "functional_class": { "type": "string", "enum": ["synarthrosis", "amphiarthrosis", "diarthrosis"] },
+        "participants": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/ArticulationParticipant" }
+        },
+        "kinematics": {
+          "type": "object",
+          "properties": {
+            "dof_rotational": { "type": "integer", "minimum": 0, "maximum": 3 },
+            "dof_translational": { "type": "integer", "minimum": 0, "maximum": 3 },
+            "axes": { "type": "array", "items": { "$ref": "#/$defs/JointAxis" } },
+            "joint_coordinate_system_id": { "type": "string" }
+          }
+        },
+        "capsule_present": { "type": "boolean" },
+        "intra_articular_structures": {
+          "type": "object",
+          "properties": {
+            "menisci_refs": { "type": "array", "items": { "type": "string" } },
+            "discs_refs": { "type": "array", "items": { "type": "string" } },
+            "labra_refs": { "type": "array", "items": { "type": "string" } },
+            "intra_articular_ligament_ids": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "ligament_ids": { "type": "array", "items": { "type": "string" } },
+        "cartilage_ids": { "type": "array", "items": { "type": "string" } },
+        "measurement_def_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "ArticulationParticipant": {
+      "type": "object",
+      "required": ["bone_id", "role"],
+      "properties": {
+        "bone_id": { "type": "string" },
+        "feature_id": { "type": "string", "description": "Specific articular facet on the bone." },
+        "role": {
+          "type": "string",
+          "enum": ["convex", "concave", "flat", "saddle_convex", "saddle_concave", "disc"]
+        },
+        "anatomical_relation_in_joint": {
+          "type": "array",
+          "description": "Direction tags positioning this participant within the joint (e.g. 'proximal', 'distal').",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "JointAxis": {
+      "type": "object",
+      "description": "Axis of motion. Zero = anatomical position by convention.",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "type": "string", "enum": ["rotation", "translation"] },
+        "name": {
+          "type": "string",
+          "description": "e.g. 'flexion_extension', 'abduction_adduction', 'internal_external_rotation', 'pronation_supination', 'inversion_eversion', 'dorsiflexion_plantarflexion'."
+        },
+        "axis_definition": {
+          "type": "object",
+          "properties": {
+            "method": { "type": "string", "enum": ["landmark_to_landmark", "anatomical_plane_normal", "anatomical_direction"] },
+            "operands": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "positive_direction_id": {
+          "type": "string",
+          "description": "AnatomicalDirection id defining the +sign of motion (e.g., flexion = anterior rotation of distal segment)."
+        },
+        "rom_measurement_def_ids": {
+          "type": "array",
+          "description": "ROM measurement defs, typically one per signed direction.",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "Ligament": {
+      "type": "object",
+      "required": ["id", "names", "attachments"],
+      "properties": {
+        "id": { "type": "string" },
+        "names": { "$ref": "#/$defs/Names" },
+        "external_ids": { "$ref": "#/$defs/ExternalIds" },
+        "kind": {
+          "type": "string",
+          "enum": ["capsular", "extracapsular", "intracapsular", "interosseous", "syndesmotic"]
+        },
+        "attachments": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "properties": {
+              "bone_id": { "type": "string" },
+              "feature_id": { "type": "string" },
+              "landmark_id": { "type": "string" }
+            }
+          }
+        },
+        "associated_articulation_ids": { "type": "array", "items": { "type": "string" } },
+        "function_tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["limits_flexion", "limits_extension", "limits_abduction", "limits_adduction", "limits_internal_rotation", "limits_external_rotation", "limits_translation", "stabilizes_capsule", "supports_arch", "suspensory"]
+          }
+        },
+        "measurement_def_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "Cartilage": {
+      "type": "object",
+      "required": ["id", "names", "kind"],
+      "properties": {
+        "id": { "type": "string" },
+        "names": { "$ref": "#/$defs/Names" },
+        "external_ids": { "$ref": "#/$defs/ExternalIds" },
+        "kind": {
+          "type": "string",
+          "enum": ["articular_hyaline", "fibrocartilage_meniscus", "fibrocartilage_disc", "fibrocartilage_labrum", "costal", "other"]
+        },
+        "located_on": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Reference" }
+        },
+        "associated_articulation_ids": { "type": "array", "items": { "type": "string" } },
+        "measurement_def_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "AnatomicalRelation": {
+      "type": "object",
+      "description": "Directed edge in the anatomical-relation graph. Lets you query 'what is distal to the femur' etc. without baking answers into bone records. All directional predicates are interpreted in the anatomical position.",
+      "required": ["id", "subject", "predicate", "object"],
+      "properties": {
+        "id": { "type": "string" },
+        "subject": { "$ref": "#/$defs/Reference" },
+        "predicate": {
+          "type": "string",
+          "enum": [
+            "articulates_with",
+            "adjacent_to",
+            "is_proximal_to",
+            "is_distal_to",
+            "is_superior_to",
+            "is_inferior_to",
+            "is_anterior_to",
+            "is_posterior_to",
+            "is_medial_to",
+            "is_lateral_to",
+            "is_radial_to",
+            "is_ulnar_to",
+            "is_tibial_to",
+            "is_fibular_to",
+            "is_deep_to",
+            "is_superficial_to",
+            "is_ipsilateral_to",
+            "is_contralateral_to",
+            "contains",
+            "is_part_of",
+            "attaches_to",
+            "transmits"
+          ]
+        },
+        "object": { "$ref": "#/$defs/Reference" },
+        "via": {
+          "$ref": "#/$defs/Reference",
+          "description": "Optional intermediary (e.g., articulation_id when predicate is articulates_with)."
+        },
+        "axis_id": {
+          "type": "string",
+          "description": "When the predicate is directional, the axis along which the relation holds."
+        }
+      }
+    },
+
+    "MeasurementDefinition": {
+      "type": "object",
+      "description": "Defines a measurable quantity (what + how + units). Values are stored in a separate dataset keyed by measurement_id and subject_id.",
+      "required": ["id", "name", "quantity_kind", "unit"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "external_ids": { "$ref": "#/$defs/ExternalIds" },
+        "quantity_kind": {
+          "type": "string",
+          "enum": [
+            "length", "width", "thickness", "diameter", "circumference", "area", "volume",
+            "angle", "torsion_angle", "version_angle",
+            "rom_angular", "rom_translational",
+            "curvature", "ratio", "count", "shape_descriptor",
+            "other"
+          ]
+        },
+        "unit": { "type": "string", "description": "UCUM code, e.g. 'mm', 'deg', 'mm3'." },
+        "scale": { "type": "string", "enum": ["nominal", "ordinal", "interval", "ratio"] },
+        "applies_to": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Reference" }
+        },
+        "method": {
+          "type": "object",
+          "properties": {
+            "operational_definition": { "type": "string" },
+            "modality": {
+              "type": "string",
+              "enum": ["manual_caliper", "ct", "mri", "x_ray", "optical_scan", "computed_from_landmarks", "other"]
+            },
+            "landmark_refs": { "type": "array", "items": { "type": "string" } },
+            "frame_id": { "type": "string" }
+          }
+        },
+        "qualifiers": {
+          "type": "object",
+          "properties": {
+            "requires_side": { "type": "boolean" },
+            "requires_axis_id": { "type": "boolean" }
+          }
+        }
+      }
+    }
+  }
+}
