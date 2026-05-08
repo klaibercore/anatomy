@@ -12,15 +12,13 @@
 </head>
 <body>
 
-<!-- Navigation -->
 <nav>
-  <a href="../index.html" class="logo">${icon('bone', 'accent')} Anatomy</a>
+  <a href="../index.html" class="logo"><span data-icon="bone" data-icon-class="accent"></span> Anatomy</a>
   <span class="nav-title">Skeletal System</span>
-  <a href="../index.html">${icon('chevron', 'dim')} Hub</a>
+  <a href="../index.html"><span data-icon="chevron" data-icon-class="dim"></span> Hub</a>
 </nav>
 
 <main class="container">
-  <!-- Breadcrumbs -->
   <div class="breadcrumbs" id="breadcrumbs">
     <a href="../index.html">Hub</a>
     <span class="sep">›</span>
@@ -28,39 +26,35 @@
   </div>
 
   <div class="browser-layout">
-    <!-- ═══ SIDEBAR ═══ -->
     <div class="browser-sidebar">
-      <!-- Search -->
       <div class="search-bar">
-        <span class="search-icon">${icon('search', 'dim')}</span>
+        <span class="search-icon"><span data-icon="search" data-icon-class="dim"></span></span>
         <input type="search" id="bone-search" placeholder="Search bones… (press /)" autocomplete="off">
-        <button class="search-clear" id="search-clear">${icon('close', 'dim')}</button>
+        <button class="search-clear" id="search-clear"><span data-icon="close" data-icon-class="dim"></span></button>
       </div>
 
-      <!-- Stats Bar -->
       <div class="stats-bar" id="stats-bar">
-        ${icon('bone', 'dim')} bones · ${icon('articulation', 'dim')} articulations · ${icon('ligament', 'dim')} ligaments
+        <span data-icon="bone" data-icon-class="dim"></span> bones ·
+        <span data-icon="articulation" data-icon-class="dim"></span> articulations ·
+        <span data-icon="ligament" data-icon-class="dim"></span> ligaments
       </div>
 
-      <!-- Filters -->
       <div class="filter-row">
-        <span class="filter-chip" data-filter="long">${icon('long', 'dim')} Long bones</span>
-        <span class="filter-chip" data-filter="flat">${icon('flat', 'dim')} Flat bones</span>
-        <span class="filter-chip" data-filter="short">${icon('short', 'dim')} Short bones</span>
-        <span class="filter-chip" data-filter="irregular">${icon('irregular', 'dim')} Irregular</span>
-        <span class="filter-chip" data-filter="sesamoid">${icon('sesamoid', 'dim')} Sesamoid</span>
+        <span class="filter-chip" data-filter="long"><span data-icon="long" data-icon-class="dim"></span> Long bones</span>
+        <span class="filter-chip" data-filter="flat"><span data-icon="flat" data-icon-class="dim"></span> Flat bones</span>
+        <span class="filter-chip" data-filter="short"><span data-icon="short" data-icon-class="dim"></span> Short bones</span>
+        <span class="filter-chip" data-filter="irregular"><span data-icon="irregular" data-icon-class="dim"></span> Irregular</span>
+        <span class="filter-chip" data-filter="sesamoid"><span data-icon="sesamoid" data-icon-class="dim"></span> Sesamoid</span>
       </div>
 
-      <!-- Actions -->
       <div class="action-row">
-        <button class="action-btn" id="random-bone-btn">${icon('random', 'dim')} Random</button>
-        <button class="action-btn" onclick="App.state.activeFilter=null;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));App._renderTree();App._renderWelcome();">${icon('clear', 'dim')} Clear</button>
+        <button class="action-btn" id="random-bone-btn"><span data-icon="random" data-icon-class="dim"></span> Random</button>
+        <button class="action-btn" onclick="App.state.activeFilter=null;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));App._renderTree();App._renderWelcome();"><span data-icon="clear" data-icon-class="dim"></span> Clear</button>
       </div>
 
-      <!-- Progress -->
       <div class="progress-summary">
         <div class="progress-summary-header">
-          <span class="progress-summary-label">${icon('viewedEmpty', 'dim')} Explored</span>
+          <span class="progress-summary-label"><span data-icon="viewedEmpty" data-icon-class="dim"></span> Explored</span>
           <span class="progress-summary-num" id="progress-num">0 / 0</span>
         </div>
         <div class="progress-summary-bar">
@@ -68,35 +62,34 @@
         </div>
       </div>
 
-      <!-- Region Tree -->
       <div id="region-tree-wrapper">
-        <div class="region-tree" id="region-tree">
-          <!-- Populated by JS -->
-        </div>
+        <div class="region-tree" id="region-tree"></div>
       </div>
 
-      <!-- Keyboard hint -->
       <div class="kbd-hint">
-        ${icon('arrowUp', 'dim')} ${icon('arrowDown', 'dim')} Navigate &nbsp;·&nbsp; <kbd>R</kbd> Random &nbsp;·&nbsp; ${icon('search', 'dim')} Search
+        <span data-icon="arrowUp" data-icon-class="dim"></span>
+        <span data-icon="arrowDown" data-icon-class="dim"></span> Navigate &nbsp;·&nbsp; <kbd>R</kbd> Random &nbsp;·&nbsp;
+        <span data-icon="search" data-icon-class="dim"></span> Search
       </div>
     </div>
 
-    <!-- ═══ MAIN AREA ═══ -->
     <div class="browser-main">
-      <!-- Search results (overlay, hidden by default) -->
       <div id="search-results" style="display:none;"></div>
-
-      <!-- Info Panel -->
-      <div id="info-panel" class="info-panel">
-        <!-- Populated by JS -->
-      </div>
+      <div id="info-panel" class="info-panel"></div>
     </div>
   </div>
 </main>
 
-<!-- Toast container -->
 <div class="toast"></div>
 
+<script>
+// ─── Render data-icon placeholders ───
+document.querySelectorAll('[data-icon]').forEach(el => {
+  const name = el.getAttribute('data-icon');
+  const cls = el.getAttribute('data-icon-class') || '';
+  el.outerHTML = icon(name, cls);
+});
+</script>
 <script src="../js/data.js"></script>
 <script src="../js/app.js"></script>
 <script>App.loadTopic('skeletal');</script>

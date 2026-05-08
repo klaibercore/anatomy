@@ -27,9 +27,9 @@
 <canvas id="particles-canvas"></canvas>
 
 <nav>
-  <a href="/" class="logo">${icon('bone', 'accent')} Anatomy</a>
+  <a href="/" class="logo"><span data-icon="bone" data-icon-class="accent"></span> Anatomy</a>
   <a href="https://github.com/klaibercore/anatomy" target="_blank" rel="noopener">
-    ${icon('external', 'dim')} GitHub
+    <span data-icon="external" data-icon-class="dim"></span> GitHub
   </a>
 </nav>
 
@@ -38,57 +38,55 @@
     <h1>Human Anatomy</h1>
     <p>Explore the human body, one system at a time. Click a topic to begin your journey.</p>
     <div class="hub-stats">
-      <span class="hub-stat">${icon('bone', 'dim')} <strong>206</strong> bones documented</span>
-      <span class="hub-stat">${icon('articulation', 'dim')} <strong>68</strong> articulations catalogued</span>
-      <span class="hub-stat">${icon('system', 'dim')} <strong>6</strong> systems coming</span>
+      <span class="hub-stat"><span data-icon="bone" data-icon-class="dim"></span> <strong>206</strong> bones documented</span>
+      <span class="hub-stat"><span data-icon="articulation" data-icon-class="dim"></span> <strong>68</strong> articulations catalogued</span>
+      <span class="hub-stat"><span data-icon="system" data-icon-class="dim"></span> <strong>6</strong> systems coming</span>
     </div>
   </div>
 
   <div class="topic-grid">
-    <!-- Skeletal System — active -->
     <a href="topics/skeletal.html" class="topic-card" style="text-decoration:none;color:inherit;">
-      <div class="icon">${icon('bone', 'large accent')}</div>
+      <div class="icon"><span data-icon="bone" data-icon-class="large accent"></span></div>
       <h3>Skeletal System</h3>
       <p>206 bones forming the structural framework of the human body — from the cranium to the phalanges. Schema-driven with 68 articulations and 84 ligaments.</p>
       <div class="topic-count">19 bone groups · Reference data</div>
     </a>
 
-    <!-- Placeholder / Coming Soon cards -->
     <div class="topic-card locked">
-      ${icon('lock', 'lock-icon')}
-      <div class="icon">${icon('system', 'large dim')}</div>
+      <span data-icon="lock" data-icon-class="lock-icon"></span>
+      <div class="icon"><span data-icon="system" data-icon-class="large dim"></span></div>
       <h3>Muscular System</h3>
       <p>600+ muscles enabling movement, posture, and heat generation. Origins, insertions, actions, and innervation mapped out.</p>
       <div class="topic-count">Coming Soon</div>
     </div>
 
     <div class="topic-card locked">
-      ${icon('lock', 'lock-icon')}
-      <div class="icon">${icon('articulation', 'large dim')}</div>
+      <span data-icon="lock" data-icon-class="lock-icon"></span>
+      <div class="icon"><span data-icon="articulation" data-icon-class="large dim"></span></div>
       <h3>Circulatory System</h3>
       <p>Heart, blood vessels, and the 60,000 miles of vasculature keeping you alive. Arteries, veins, and capillary networks.</p>
       <div class="topic-count">Coming Soon</div>
     </div>
 
     <div class="topic-card locked">
-      ${icon('lock', 'lock-icon')}
-      <div class="icon">${icon('kbd', 'large dim')}</div>
+      <span data-icon="lock" data-icon-class="lock-icon"></span>
+      <div class="icon"><span data-icon="kbd" data-icon-class="large dim"></span></div>
       <h3>Nervous System</h3>
       <p>Brain, spinal cord, and the network of nerves firing signals at 120 m/s. Central and peripheral divisions.</p>
       <div class="topic-count">Coming Soon</div>
     </div>
 
     <div class="topic-card locked">
-      ${icon('lock', 'lock-icon')}
-      <div class="icon">${icon('ribs', 'large dim')}</div>
+      <span data-icon="lock" data-icon-class="lock-icon"></span>
+      <div class="icon"><span data-icon="ribs" data-icon-class="large dim"></span></div>
       <h3>Respiratory System</h3>
       <p>Lungs, diaphragm, airways, and the 20,000 breaths you take each day. Gas exchange and mechanics.</p>
       <div class="topic-count">Coming Soon</div>
     </div>
 
     <div class="topic-card locked">
-      ${icon('lock', 'lock-icon')}
-      <div class="icon">${icon('spine', 'large dim')}</div>
+      <span data-icon="lock" data-icon-class="lock-icon"></span>
+      <div class="icon"><span data-icon="spine" data-icon-class="large dim"></span></div>
       <h3>Digestive System</h3>
       <p>From mouth to colon — the 9-meter journey of digestion. Organs, enzymes, and nutrient absorption.</p>
       <div class="topic-count">Coming Soon</div>
@@ -97,6 +95,13 @@
 </main>
 
 <script>
+// ─── Render data-icon placeholders ───
+document.querySelectorAll('[data-icon]').forEach(el => {
+  const name = el.getAttribute('data-icon');
+  const cls = el.getAttribute('data-icon-class') || '';
+  el.outerHTML = icon(name, cls);
+});
+
 // ─── Animated Particle Background ───
 (function() {
   const canvas = document.getElementById('particles-canvas');
