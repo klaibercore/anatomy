@@ -126,7 +126,7 @@ const App = {
         ${isParent ? `<span class="tree-toggle ${isExpanded ? 'expanded' : ''}" data-region="${node.id}">
           <svg width="10" height="10" viewBox="0 0 10 10"><path d="M3 1L7 5L3 9" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
         </span>` : `<span class="tree-toggle-spacer"></span>`}
-        <span class="tree-icon">${node.icon || '📁'}</span>
+        <span class="tree-icon">${node.icon ? icon(node.icon, 'dim') : ''}</span>
         <span class="tree-label">${this._escapeHtml(node.name || node.id)}</span>
         <span class="tree-count">${bones.length}</span>
         <div class="tree-progress" title="${viewedCount}/${bones.length} explored">
@@ -163,10 +163,10 @@ const App = {
       const sideSym = SIDE_SYMBOLS[b.side] || '';
       const shapeIcon = SHAPE_CLASS_ICONS[b.shape_class] || '';
       return `<div class="tree-bone ${isActive ? 'active' : ''}" data-bone="${b.id}" style="--indent:${(node.children ? 2 : 1) * 20}px">
-        <span class="tree-bone-viewed">${isViewed ? '👁️' : ''}</span>
+        <span class="tree-bone-viewed">${isViewed ? icon('viewed', 'dim') : ''}</span>
         <span class="tree-bone-name">${this._escapeHtml(b.names?.preferred?.en || b.id)}</span>
         <span class="tree-bone-meta">
-          <span class="shape-badge shape-${b.shape_class}" title="${b.shape_class}">${shapeIcon}</span>
+          <span class="shape-badge shape-${b.shape_class}" title="${b.shape_class}">${shapeIcon ? icon(shapeIcon, 'dim') : ''}</span>
           ${sideSym ? `<span class="side-badge" title="${b.side}">${sideSym}</span>` : ''}
         </span>
       </div>`;
@@ -231,7 +231,7 @@ const App = {
           <h2 class="card-title">${this._escapeHtml(en)}</h2>
           ${la ? `<div class="card-latin">${this._escapeHtml(la)}</div>` : ''}
           <div class="card-meta-row">
-            <span class="card-meta-chip">🦴 ${bones.length} bones</span>
+            <span class="card-meta-chip">${icon('bone', 'dim')} ${bones.length} bones</span>
             ${fma ? `<span class="card-meta-chip mono">FMA:${this._escapeHtml(fma.code)}</span>` : ''}
             <span class="card-meta-chip">${this._escapeHtml(region.division || '')}</span>
           </div>
@@ -253,7 +253,7 @@ const App = {
           </div>
           ${Object.entries(shapeGroups).map(([sc, list]) => `
             <div class="card-group-row" onclick="App._filterByShape('${sc}')" style="cursor:pointer;">
-              <span>${SHAPE_CLASS_ICONS[sc] || ''} ${sc.charAt(0).toUpperCase() + sc.slice(1)}</span>
+              <span>${SHAPE_CLASS_ICONS[sc] ? icon(SHAPE_CLASS_ICONS[sc], 'dim') : ''} ${sc.charAt(0).toUpperCase() + sc.slice(1)}</span>
               <span class="card-count">${list.length}</span>
             </div>
           `).join('')}
@@ -266,9 +266,9 @@ const App = {
           ${bones.map(b => {
             const isViewed = viewed.has(b.id);
             return `<div class="card-bone-row" onclick="App._showBone('${b.id}')">
-              ${isViewed ? '<span class="viewed-dot">👁️</span>' : '<span class="viewed-dot-empty"></span>'}
+              ${isViewed ? '<span class="viewed-dot">' + icon('viewed', 'dim') + '</span>' : '<span class="viewed-dot-empty"></span>'}
               <span class="card-bone-name">${this._escapeHtml(b.names?.preferred?.en || b.id)}</span>
-              <span class="card-bone-meta">${SHAPE_CLASS_ICONS[b.shape_class] || ''} ${SIDE_SYMBOLS[b.side] || ''}</span>
+              <span class="card-bone-meta">${SHAPE_CLASS_ICONS[b.shape_class] ? icon(SHAPE_CLASS_ICONS[b.shape_class], 'dim') : ''} ${SIDE_SYMBOLS[b.side] || ''}</span>
             </div>`;
           }).join('')}
         </div>
@@ -370,7 +370,7 @@ const App = {
           <h2 class="card-title">${this._escapeHtml(en)}</h2>
           ${la ? `<div class="card-latin">${this._escapeHtml(la)}</div>` : ''}
           <div class="card-meta-row">
-            ${bone.shape_class ? `<span class="card-meta-chip">${SHAPE_CLASS_ICONS[bone.shape_class] || ''} ${bone.shape_class.charAt(0).toUpperCase() + bone.shape_class.slice(1)}</span>` : ''}
+            ${bone.shape_class ? `<span class="card-meta-chip">${SHAPE_CLASS_ICONS[bone.shape_class] ? icon(SHAPE_CLASS_ICONS[bone.shape_class], 'dim') : ''} ${bone.shape_class.charAt(0).toUpperCase() + bone.shape_class.slice(1)}</span>` : ''}
             <span class="card-meta-chip" title="${bone.side}">${SIDE_SYMBOLS[bone.side] || bone.side} ${bone.side}</span>
             ${bone.axial_or_appendicular ? `<span class="card-meta-chip">${bone.axial_or_appendicular}</span>` : ''}
           </div>
@@ -382,10 +382,10 @@ const App = {
 
         <div class="card-section card-actions">
           <button class="card-btn ${isFav ? 'fav' : ''}" onclick="App._toggleFavorite('${bone.id}')">
-            ${isFav ? '⭐' : '☆'} ${isFav ? 'Bookmarked' : 'Bookmark'}
+            ${isFav ? icon('bookmarkFilled', 'accent') : icon('bookmark', 'dim')} ${isFav ? 'Bookmarked' : 'Bookmark'}
           </button>
-          <button class="card-btn" onclick="App._showRandomBone()">🎲 Random Bone</button>
-          ${region ? `<button class="card-btn" onclick="App._viewInContext('${region.id}')">🔍 View in context</button>` : ''}
+          <button class="card-btn" onclick="App._showRandomBone()">${icon('random', 'dim')} Random Bone</button>
+          ${region ? `<button class="card-btn" onclick="App._viewInContext('${region.id}')">${icon('search', 'dim')} View in context</button>` : ''}
         </div>
 
         <div class="card-section">
@@ -474,7 +474,7 @@ const App = {
 
     panel.innerHTML = `
       <div class="welcome-card">
-        <div class="welcome-icon">🦴</div>
+        <div class="welcome-icon">${icon('bone', 'xl accent')}</div>
         <h2 class="welcome-title">Skeletal System</h2>
         <p class="welcome-subtitle">${totalBones} bones · ${totalArts} articulations · ${totalLigs} ligaments</p>
 
@@ -554,7 +554,7 @@ const App = {
       results.style.display = '';
 
       if (hits.length === 0) {
-        results.innerHTML = `<div class="search-empty">🔍 No bones found matching "<strong>${this._escapeHtml(query)}</strong>"</div>`;
+        results.innerHTML = `<div class="search-empty">${icon('search', 'dim')} No bones found matching "<strong>${this._escapeHtml(query)}</strong>"</div>`;
         return;
       }
 
@@ -571,7 +571,7 @@ const App = {
             <span class="search-result-latin">${this._escapeHtml(la)}</span>
           </div>
           <div class="search-result-meta">
-            <span class="shape-badge shape-${b.shape_class}">${shapeIcon}</span>
+            <span class="shape-badge shape-${b.shape_class}">${shapeIcon ? icon(shapeIcon, 'dim') : ''}</span>
             ${sideSym ? `<span class="side-badge">${sideSym}</span>` : ''}
           </div>
         </div>`;
@@ -689,7 +689,7 @@ const App = {
     const totalBones = this.state.data.bones.length;
     const totalArts = (this.state.data.articulations || []).length;
     const totalLigs = (this.state.data.ligaments || []).length;
-    el.textContent = `🦴 ${totalBones} bones · 🫂 ${totalArts} articulations · 🔗 ${totalLigs} ligaments`;
+    el.innerHTML = `${icon('bone', 'dim')} ${totalBones} bones · ${icon('articulation', 'dim')} ${totalArts} articulations · ${icon('ligament', 'dim')} ${totalLigs} ligaments`;
   },
 
   /* ── Progress ── */
@@ -728,7 +728,7 @@ const App = {
       this._showToast('Removed from bookmarks');
     } else {
       this.state.favorites.add(boneId);
-      this._showToast('⭐ Bookmarked!');
+      this._showToast(icon('bookmarkFilled', 'accent') + ' Bookmarked!');
     }
     this._saveFavorites();
     this._showBone(boneId); // re-render
@@ -741,7 +741,7 @@ const App = {
       toast.className = 'toast';
       document.body.appendChild(toast);
     }
-    toast.textContent = msg;
+    toast.innerHTML = msg;
     toast.classList.add('show');
     clearTimeout(this._toastTimer);
     this._toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
@@ -808,7 +808,7 @@ const App = {
 
   _showError(msg) {
     const panel = document.getElementById('info-panel');
-    if (panel) panel.innerHTML = `<div class="welcome-card"><div class="welcome-icon">⚠️</div><h2>Error</h2><p>${this._escapeHtml(msg)}</p></div>`;
+    if (panel) panel.innerHTML = `<div class="welcome-card"><div class="welcome-icon">${icon('system', 'dim')}</div><h2>Error</h2><p>${this._escapeHtml(msg)}</p></div>`;
   }
 };
 

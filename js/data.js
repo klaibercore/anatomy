@@ -7,7 +7,7 @@ const TOPICS = {
     id: 'skeletal',
     title: 'Skeletal System',
     subtitle: '206 bones, 68 articulations, 84 ligaments — the structural framework of the human body',
-    icon: '🦴',
+    icon: 'bone',
     color: '#e8d5b7',
     route: 'topics/skeletal.html',
     dataFile: 'data/skeletal.json',
@@ -26,36 +26,36 @@ const REGION_HIERARCHY = [
   {
     id: 'reg:axial',
     name: 'Axial Skeleton',
-    icon: '🔝',
+    icon: 'axial',
     children: [
       {
         id: 'reg:skull',
         name: 'Neurocranium (Skull vault)',
-        icon: '🧠',
+        icon: 'skull',
         parentRegion: 'reg:axial'
       },
       {
         id: 'reg:facial_skeleton',
         name: 'Viscerocranium (Face)',
-        icon: '👤',
+        icon: 'face',
         parentRegion: 'reg:axial'
       },
       {
         id: 'reg:hyoid_apparatus',
         name: 'Hyoid Apparatus',
-        icon: '🦷',
+        icon: 'hyoid',
         parentRegion: 'reg:axial'
       },
       {
         id: 'reg:vertebral_column',
         name: 'Vertebral Column',
-        icon: '📏',
+        icon: 'spine',
         parentRegion: 'reg:axial'
       },
       {
         id: 'reg:thoracic_cage',
         name: 'Thoracic Cage',
-        icon: '🛡️',
+        icon: 'ribs',
         parentRegion: 'reg:axial'
       }
     ]
@@ -63,30 +63,30 @@ const REGION_HIERARCHY = [
   {
     id: 'reg:appendicular',
     name: 'Appendicular Skeleton',
-    icon: '🏃',
+    icon: 'appendicular',
     children: [
       {
         id: 'reg:pectoral_girdle',
         name: 'Pectoral Girdle',
-        icon: '🔗',
+        icon: 'pectoral',
         parentRegion: 'reg:appendicular'
       },
       {
         id: 'reg:upper_limb',
         name: 'Upper Limb (Free part)',
-        icon: '💪',
+        icon: 'upper',
         parentRegion: 'reg:appendicular'
       },
       {
         id: 'reg:pelvic_girdle',
         name: 'Pelvic Girdle',
-        icon: '🦴',
+        icon: 'pelvic',
         parentRegion: 'reg:appendicular'
       },
       {
         id: 'reg:lower_limb',
         name: 'Lower Limb (Free part)',
-        icon: '🦵',
+        icon: 'lower',
         parentRegion: 'reg:appendicular'
       }
     ]
@@ -94,11 +94,11 @@ const REGION_HIERARCHY = [
 ];
 
 const SHAPE_CLASS_ICONS = {
-  'long': '📏',
-  'short': '⚪',
-  'flat': '🔲',
-  'irregular': '🌀',
-  'sesamoid': '💎'
+  'long': 'long',
+  'short': 'short',
+  'flat': 'flat',
+  'irregular': 'irregular',
+  'sesamoid': 'sesamoid'
 };
 
 const SIDE_SYMBOLS = {

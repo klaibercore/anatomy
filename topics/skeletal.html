@@ -8,14 +8,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/icons.js"></script>
 </head>
 <body>
 
 <!-- Navigation -->
 <nav>
-  <a href="../index.html" class="logo"><span>🧬</span> Anatomy</a>
+  <a href="../index.html" class="logo">${icon('bone', 'accent')} Anatomy</a>
   <span class="nav-title">Skeletal System</span>
-  <a href="../index.html">← Hub</a>
+  <a href="../index.html">${icon('chevron', 'dim')} Hub</a>
 </nav>
 
 <main class="container">
@@ -31,33 +32,35 @@
     <div class="browser-sidebar">
       <!-- Search -->
       <div class="search-bar">
-        <span class="search-icon">🔍</span>
+        <span class="search-icon">${icon('search', 'dim')}</span>
         <input type="search" id="bone-search" placeholder="Search bones… (press /)" autocomplete="off">
-        <button class="search-clear" id="search-clear">✕</button>
+        <button class="search-clear" id="search-clear">${icon('close', 'dim')}</button>
       </div>
 
       <!-- Stats Bar -->
-      <div class="stats-bar" id="stats-bar">🦴 — bones · 🫂 — articulations · 🔗 — ligaments</div>
+      <div class="stats-bar" id="stats-bar">
+        ${icon('bone', 'dim')} bones · ${icon('articulation', 'dim')} articulations · ${icon('ligament', 'dim')} ligaments
+      </div>
 
       <!-- Filters -->
       <div class="filter-row">
-        <span class="filter-chip" data-filter="long">📏 Long bones</span>
-        <span class="filter-chip" data-filter="flat">🔲 Flat bones</span>
-        <span class="filter-chip" data-filter="short">⚪ Short bones</span>
-        <span class="filter-chip" data-filter="irregular">🌀 Irregular</span>
-        <span class="filter-chip" data-filter="sesamoid">💎 Sesamoid</span>
+        <span class="filter-chip" data-filter="long">${icon('long', 'dim')} Long bones</span>
+        <span class="filter-chip" data-filter="flat">${icon('flat', 'dim')} Flat bones</span>
+        <span class="filter-chip" data-filter="short">${icon('short', 'dim')} Short bones</span>
+        <span class="filter-chip" data-filter="irregular">${icon('irregular', 'dim')} Irregular</span>
+        <span class="filter-chip" data-filter="sesamoid">${icon('sesamoid', 'dim')} Sesamoid</span>
       </div>
 
       <!-- Actions -->
       <div class="action-row">
-        <button class="action-btn" id="random-bone-btn">🎲 Random</button>
-        <button class="action-btn" onclick="App.state.activeFilter=null;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));App._renderTree();App._renderWelcome();">✕ Clear</button>
+        <button class="action-btn" id="random-bone-btn">${icon('random', 'dim')} Random</button>
+        <button class="action-btn" onclick="App.state.activeFilter=null;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));App._renderTree();App._renderWelcome();">${icon('clear', 'dim')} Clear</button>
       </div>
 
       <!-- Progress -->
       <div class="progress-summary">
         <div class="progress-summary-header">
-          <span class="progress-summary-label">Explored</span>
+          <span class="progress-summary-label">${icon('viewedEmpty', 'dim')} Explored</span>
           <span class="progress-summary-num" id="progress-num">0 / 0</span>
         </div>
         <div class="progress-summary-bar">
@@ -74,7 +77,7 @@
 
       <!-- Keyboard hint -->
       <div class="kbd-hint">
-        <kbd>↑↓</kbd> Navigate &nbsp;·&nbsp; <kbd>R</kbd> Random &nbsp;·&nbsp; <kbd>/</kbd> Search
+        ${icon('arrowUp', 'dim')} ${icon('arrowDown', 'dim')} Navigate &nbsp;·&nbsp; <kbd>R</kbd> Random &nbsp;·&nbsp; ${icon('search', 'dim')} Search
       </div>
     </div>
 
